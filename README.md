@@ -1,6 +1,6 @@
 # Pitchmate
 
-**Your personal guide to applying at startups — not generic advice, actual intel.**
+**Your personal guide to applying at startups that is not generic advice, actual intel.**
 
 Most career tools are built to beat ATS systems. Pitchmate is built for a different problem: you found a startup you want to work at, you have a resume, and you have no idea how to pitch yourself in a way that lands with a founder.
 
@@ -14,7 +14,7 @@ Pitchmate takes your resume and a job description, researches the company in rea
 
 | Agent | What it does |
 |-------|-------------|
-| **JD Agent** | Parses any job description — URL, PDF, .docx, or raw paste — into structured role intelligence |
+| **JD Agent** | Parses any job description - URL, PDF, .docx, or raw paste, into structured role intelligence |
 | **Resume Agent** | Extracts your skills, projects, experience, and seniority level from your PDF |
 | **Company Agent** | Runs 3 targeted Tavily searches (funding, founders, recent news) and synthesises real company intel ,not their About page |
 | **Gap Agent** | Compares your resume against the JD like a friend who works in tech — direct, specific, honest |
