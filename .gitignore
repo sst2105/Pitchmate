@@ -18,6 +18,14 @@
 # production
 /build
 
+# python
+backend/.venv/
+backend/venv/
+__pycache__/
+*.py[cod]
+backend/.env
+.env
+
 # misc
 .DS_Store
 *.pem
