@@ -1,24 +1,23 @@
-from fastapi import APIRouter, Header, HTTPException
+from fastapi import APIRouter, Header, HTTPException, Depends
 from typing import Optional
+
 
 from agents.pitch_agent import generate_pitch
 from agents.gap_agent import GapReport
 from agents.company_agent import CompanyProfile
 from memory.session_memory import get_session, update_session
+from services.database import get_db
+from sqlalchemy.orm import Session
 
 router = APIRouter(prefix="/pipeline")
 
 
 @router.post("/pitch")
 async def pipeline_pitch(
-    x_session_id: Optional[str] = Header(default=None),
-) -> dict:
-    """
-    Generate pitch strategy + formatted messages for email, LinkedIn, Wellfound.
-
-    Requires gap + company in session.
-    Run /pipeline/gap and /pipeline/company first.
-    """
+    x_session_id : Optional[str] = Header(default=None),
+    db:Session = Depends(get_db),) -> dict:
+    session = get_session(db, x_session_id)
+    update_session(x_session_id, pitch = ...)
     if not x_session_id:
         raise HTTPException(status_code=400, detail="X-Session-ID header is required")
 

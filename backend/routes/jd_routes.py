@@ -12,7 +12,7 @@ router = APIRouter()
 
 class JDInput(BaseModel):
     url:  str = ""
-    text: str = ""  # raw paste — copy/paste from browser, PDF, anywhere
+    text: str = ""  
 
 
 @router.post("/analyze/jd")
@@ -22,11 +22,11 @@ async def analyze_jd_route(body: JDInput) -> dict:
 
     try:
         if body.text.strip():
-            # Raw paste — most reliable, no network needed
+
             print(f"[jd_routes] Text input: {len(body.text)} chars")
             jd_text = body.text.strip()[:6000]
         else:
-            # URL — goes through Jina Reader in parsers.py
+    
             print(f"[jd_routes] URL input: {body.url}")
             jd_text = parse_jd(body.url)
 

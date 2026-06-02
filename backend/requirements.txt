@@ -7,3 +7,5 @@ python-dotenv
 python-multipart
 python-docx
 tavily-python
+sqlalchemy
+psycopg2-binary

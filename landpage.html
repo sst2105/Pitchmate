@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pitchmate — Land startup roles with confidence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #F5EFE6;
+  --cream-dark: #EDE4D8;
+  --mocha-100: #C4A882;
+  --mocha-200: #A07850;
+  --mocha-300: #7A5535;
+  --mocha-400: #5C3D22;
+  --mocha-500: #3D2510;
+  --espresso: #1C1008;
+  --text-primary: #1C1008;
+  --text-secondary: #5C4030;
+  --text-muted: #9A7A62;
+  --card-bg: #FFFFFF;
+  --border: #D4C4B0;
+  --surface: #EDE4D8;
+  --nav-bg: rgba(245,239,230,0.85);
+  font-size: 16px;
+}
+[data-theme="dark"] {
+  --cream: #1C1008;
+  --cream-dark: #251508;
+  --text-primary: #F0E8DC;
+  --text-secondary: #C4A882;
+  --text-muted: #7A5535;
+  --card-bg: #2A1A0C;
+  --border: #3D2510;
+  --surface: #251508;
+  --nav-bg: rgba(28,16,8,0.9);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--text-primary);
+  transition: background 0.3s, color 0.3s;
+  overflow-x: hidden;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: var(--nav-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 4rem;
+  height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  transition: background 0.3s;
+}
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--mocha-300);
+  letter-spacing: -0.02em;
+}
+.nav-right { display: flex; align-items: center; gap: 2rem; }
+.nav-link {
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-link:hover { color: var(--text-primary); }
+.nav-cta {
+  background: var(--mocha-300);
+  color: #F5EFE6;
+  padding: 0.5rem 1.25rem;
+  border-radius: 100px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.15s;
+}
+.nav-cta:hover { background: var(--mocha-400); transform: translateY(-1px); }
+.theme-toggle {
+  background: none; border: 1px solid var(--border);
+  width: 36px; height: 36px; border-radius: 50%;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  color: var(--text-secondary); font-size: 1rem; transition: all 0.2s;
+}
+.theme-toggle:hover { border-color: var(--mocha-200); color: var(--text-primary); }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  padding: 120px 4rem 80px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero-bg-circle {
+  position: absolute;
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(160,120,80,0.12) 0%, transparent 70%);
+  right: -100px; top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 0.35rem 1rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--mocha-200);
+  margin-bottom: 1.5rem;
+  opacity: 0; transform: translateY(20px);
+  animation: fadeUp 0.6s 0.1s forwards;
+}
+.eyebrow-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--mocha-200);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; } 50% { opacity: 0.4; }
+}
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3rem, 5vw, 4.5rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+  opacity: 0; transform: translateY(24px);
+  animation: fadeUp 0.7s 0.2s forwards;
+}
+.hero-title em {
+  font-style: italic;
+  color: var(--mocha-200);
+}
+.hero-body {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--text-secondary);
+  max-width: 520px;
+  margin-bottom: 2.5rem;
+  opacity: 0; transform: translateY(24px);
+  animation: fadeUp 0.7s 0.35s forwards;
+}
+.hero-actions {
+  display: flex; align-items: center; gap: 1rem;
+  opacity: 0; transform: translateY(24px);
+  animation: fadeUp 0.7s 0.5s forwards;
+}
+.btn-primary {
+  background: var(--mocha-300);
+  color: #F5EFE6;
+  padding: 0.875rem 2rem;
+  border-radius: 100px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  text-decoration: none;
+  border: none; cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex; align-items: center; gap: 0.5rem;
+}
+.btn-primary:hover { background: var(--mocha-400); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(90,50,20,0.2); }
+.btn-secondary {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  text-decoration: none;
+  display: flex; align-items: center; gap: 0.35rem;
+  transition: color 0.2s;
+}
+.btn-secondary:hover { color: var(--text-primary); }
+.hero-right {
+  opacity: 0; transform: translateX(30px);
+  animation: fadeRight 0.8s 0.4s forwards;
+}
+.hero-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+.hero-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--mocha-100), var(--mocha-300));
+}
+.card-label {
+  font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+.card-score {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.5rem; font-weight: 900;
+  color: var(--mocha-200); line-height: 1;
+  margin-bottom: 0.5rem;
+}
+.card-score-label { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.5rem; }
+.card-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+.tag {
+  padding: 0.3rem 0.75rem; border-radius: 100px;
+  font-size: 0.78rem; font-weight: 500;
+}
+.tag-green { background: #E8F4E8; color: #3A6B3A; }
+.tag-amber { background: #FBF0E0; color: #8B5E20; }
+.tag-red { background: #FAE8E8; color: #8B2020; }
+[data-theme="dark"] .tag-green { background: rgba(58,107,58,0.2); color: #7AB87A; }
+[data-theme="dark"] .tag-amber { background: rgba(139,94,32,0.2); color: #D4A060; }
+[data-theme="dark"] .tag-red { background: rgba(139,32,32,0.2); color: #D47A7A; }
+.card-pitch-preview {
+  background: var(--surface);
+  border-radius: 12px;
+  padding: 1rem;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  font-style: italic;
+  border-left: 3px solid var(--mocha-100);
+}
+.floating-badge {
+  position: absolute; top: -12px; right: 24px;
+  background: var(--mocha-300);
+  color: #F5EFE6;
+  padding: 0.4rem 1rem;
+  border-radius: 100px;
+  font-size: 0.78rem; font-weight: 500;
+}
+
+/* LOGO BAR */
+.logo-bar {
+  padding: 2rem 4rem;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 0; overflow: hidden;
+  background: var(--surface);
+}
+.logo-bar-label {
+  font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--text-muted);
+  white-space: nowrap; margin-right: 3rem;
+}
+.logo-scroll {
+  display: flex; gap: 3rem; align-items: center;
+  animation: scrollLeft 20s linear infinite;
+  white-space: nowrap;
+}
+.logo-item {
+  font-size: 0.9rem; font-weight: 500; color: var(--text-muted);
+  opacity: 0.7;
+}
+@keyframes scrollLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* SECTION SHARED */
+section { padding: 6rem 4rem; }
+.section-eyebrow {
+  font-size: 0.78rem; font-weight: 500; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--mocha-200);
+  margin-bottom: 1rem;
+}
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  margin-bottom: 1.25rem;
+}
+.section-title em { font-style: italic; color: var(--mocha-200); }
+.section-body {
+  font-size: 1rem; line-height: 1.75;
+  color: var(--text-secondary); max-width: 560px;
+}
+
+/* HOW IT WORKS — 3 steps asymmetric */
+.how-grid {
+  display: grid; grid-template-columns: 1fr 1.2fr;
+  gap: 5rem; align-items: start; margin-top: 4rem;
+}
+.steps { display: flex; flex-direction: column; gap: 0; }
+.step {
+  display: flex; gap: 1.5rem;
+  padding: 1.75rem 0;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: all 0.3s;
+  opacity: 0.5;
+}
+.step.active { opacity: 1; }
+.step:first-child { border-top: 1px solid var(--border); }
+.step-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem; font-weight: 900;
+  color: var(--border); line-height: 1;
+  min-width: 2.5rem;
+  transition: color 0.3s;
+}
+.step.active .step-num { color: var(--mocha-200); }
+.step-content h3 {
+  font-size: 1rem; font-weight: 500;
+  color: var(--text-primary); margin-bottom: 0.4rem;
+}
+.step-content p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; }
+.step-visual {
+  position: sticky; top: 120px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 2rem;
+  min-height: 280px;
+  transition: all 0.4s;
+}
+.step-visual-content { display: none; }
+.step-visual-content.visible { display: block; }
+.visual-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem; font-weight: 700;
+  color: var(--text-primary); margin-bottom: 1rem;
+}
+.visual-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
+.chip {
+  padding: 0.35rem 0.8rem; border-radius: 8px;
+  font-size: 0.8rem; font-weight: 500;
+  background: var(--surface); color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
+.chip.highlight { background: var(--mocha-300); color: #F5EFE6; border-color: transparent; }
+
+/* AGENT STACK CARDS */
+.agents-section { background: var(--espresso); }
+[data-theme="dark"] .agents-section { background: #0E0804; }
+.agents-section .section-eyebrow { color: var(--mocha-100); }
+.agents-section .section-title { color: #F0E8DC; }
+.agents-section .section-body { color: rgba(240,232,220,0.6); }
+.agents-header { margin-bottom: 4rem; }
+.agent-stack {
+  position: relative;
+  height: 740px;
+}
+.agent-card {
+  position: absolute;
+  left: 0; right: 0;
+  border-radius: 20px;
+  padding: 2.5rem;
+  cursor: pointer;
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  overflow: hidden;
+}
+.agent-card-inner {
+  display: flex; justify-content: space-between; align-items: flex-start;
+}
+.agent-card-text h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem; font-weight: 700;
+  margin-bottom: 0.5rem; line-height: 1.2;
+}
+.agent-card-text p {
+  font-size: 0.9rem; line-height: 1.65; max-width: 420px;
+  opacity: 0.8;
+}
+.agent-card-icon {
+  font-size: 2.5rem; opacity: 0.7; flex-shrink: 0;
+}
+.agent-expand {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255,255,255,0.15);
+  display: none;
+}
+.agent-card.expanded .agent-expand { display: block; }
+.expand-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.expand-item {
+  background: rgba(0,0,0,0.15);
+  border-radius: 12px; padding: 1rem;
+}
+.expand-item-label { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.6; margin-bottom: 0.35rem; }
+.expand-item-value { font-size: 0.88rem; line-height: 1.5; }
+.agent-card-num {
+  position: absolute; bottom: 1.5rem; right: 2rem;
+  font-family: 'Playfair Display', serif;
+  font-size: 5rem; font-weight: 900;
+  opacity: 0.07; line-height: 1;
+}
+
+/* Colors for each card */
+.ac-1 { background: #7A5535; color: #F5EFE6; }
+.ac-2 { background: #5C3D22; color: #F5EFE6; }
+.ac-3 { background: #3D2510; color: #F5EFE6; }
+.ac-4 { background: #8B6345; color: #F5EFE6; }
+.ac-5 { background: #A07850; color: #F5EFE6; }
+
+/* PITCH SELECTOR SECTION */
+.pitch-section { background: var(--surface); }
+.pitch-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; margin-top: 3rem; }
+.pitch-options { display: flex; flex-direction: column; gap: 1rem; }
+.pitch-opt {
+  background: var(--card-bg);
+  border: 1.5px solid var(--border);
+  border-radius: 16px;
+  padding: 1.25rem 1.5rem;
+  cursor: pointer;
+  transition: all 0.25s;
+  display: flex; align-items: center; gap: 1rem;
+}
+.pitch-opt:hover { border-color: var(--mocha-200); transform: translateX(4px); }
+.pitch-opt.active { border-color: var(--mocha-300); background: var(--mocha-300); color: #F5EFE6; }
+.pitch-opt-icon { font-size: 1.5rem; }
+.pitch-opt-label { font-weight: 500; font-size: 0.95rem; }
+.pitch-opt-sub { font-size: 0.8rem; opacity: 0.6; }
+.pitch-preview-box {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 2rem;
+  min-height: 300px;
+}
+.pitch-preview-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+.pitch-preview-tag {
+  font-size: 0.75rem; font-weight: 500; letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.75rem; border-radius: 100px;
+  background: var(--surface); color: var(--text-muted);
+}
+.pitch-preview-text {
+  font-size: 0.9rem; line-height: 1.75;
+  color: var(--text-secondary);
+}
+.pitch-preview-text strong { color: var(--text-primary); font-weight: 500; }
+
+/* TESTIMONIAL / SOCIAL PROOF */
+.proof-section { }
+.proof-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem; margin-top: 3rem;
+}
+.proof-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.5rem;
+  transition: transform 0.25s;
+}
+.proof-card:hover { transform: translateY(-3px); }
+.proof-quote {
+  font-size: 0.9rem; line-height: 1.7;
+  color: var(--text-secondary); margin-bottom: 1.25rem;
+  font-style: italic;
+}
+.proof-author { display: flex; align-items: center; gap: 0.75rem; }
+.proof-avatar {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--surface);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.85rem; font-weight: 600; color: var(--mocha-200);
+  border: 1px solid var(--border);
+}
+.proof-name { font-size: 0.85rem; font-weight: 500; color: var(--text-primary); }
+.proof-role { font-size: 0.78rem; color: var(--text-muted); }
+
+/* CTA SECTION */
+.cta-section {
+  background: var(--mocha-400);
+  text-align: center;
+  padding: 7rem 4rem;
+}
+.cta-section .section-title { color: #F5EFE6; max-width: 700px; margin: 0 auto 1rem; }
+.cta-section .section-body { color: rgba(245,239,230,0.7); margin: 0 auto 2.5rem; text-align: center; }
+.cta-section .btn-primary { background: #F5EFE6; color: var(--mocha-400); }
+.cta-section .btn-primary:hover { background: #FFFFFF; }
+
+/* FOOTER */
+footer {
+  background: var(--espresso);
+  padding: 3rem 4rem;
+  display: flex; align-items: center; justify-content: space-between;
+}
+[data-theme="dark"] footer { background: #0E0804; }
+.footer-logo { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 700; color: var(--mocha-100); }
+.footer-links { display: flex; gap: 2rem; }
+.footer-link { font-size: 0.85rem; color: rgba(196,168,130,0.6); text-decoration: none; transition: color 0.2s; }
+.footer-link:hover { color: var(--mocha-100); }
+.footer-copy { font-size: 0.8rem; color: rgba(196,168,130,0.4); }
+
+/* SCROLL ANIMATIONS */
+.reveal {
+  opacity: 0; transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeRight {
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; padding: 100px 2rem 60px; }
+  .hero-right { display: none; }
+  .how-grid { grid-template-columns: 1fr; }
+  .step-visual { position: static; }
+  section { padding: 4rem 2rem; }
+  nav { padding: 0 2rem; }
+  .proof-grid { grid-template-columns: 1fr; }
+  .pitch-grid { grid-template-columns: 1fr; }
+  footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+}
+
+/* DIFFERENTIATION SECTION */
+.diff-section { background: var(--cream); padding: 6rem 4rem; }
+.diff-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 5rem; align-items: center; margin-top: 3rem;
+}
+.diff-left { }
+.diff-compare {
+  display: flex; flex-direction: column; gap: 0;
+  border: 1px solid var(--border); border-radius: 20px;
+  overflow: hidden; background: var(--card-bg);
+}
+.diff-row {
+  display: grid; grid-template-columns: 1.1fr 1fr 1fr;
+  border-bottom: 1px solid var(--border);
+}
+.diff-row:last-child { border-bottom: none; }
+.diff-cell {
+  padding: 1rem 1.25rem;
+  font-size: 0.85rem; line-height: 1.5;
+  color: var(--text-secondary);
+  border-right: 1px solid var(--border);
+}
+.diff-cell:last-child { border-right: none; }
+.diff-header { background: var(--surface); font-weight: 500; font-size: 0.78rem; letter-spacing: 0.05em; color: var(--text-muted); }
+.diff-header.highlight { background: var(--mocha-300); color: #F5EFE6; }
+.diff-cell.yes { color: var(--text-primary); font-weight: 500; }
+.diff-cell.no { color: var(--text-muted); }
+.diff-cell.pm { color: var(--mocha-200); font-weight: 500; }
+.diff-points { display: flex; flex-direction: column; gap: 1.5rem; margin-top: 2.5rem; }
+.diff-point { display: flex; gap: 1rem; align-items: flex-start; }
+.diff-point-icon {
+  width: 36px; height: 36px; border-radius: 10px;
+  background: var(--surface); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; flex-shrink: 0;
+}
+.diff-point-text h4 { font-size: 0.95rem; font-weight: 500; color: var(--text-primary); margin-bottom: 0.25rem; }
+.diff-point-text p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Pitchmate</div>
+  <div class="nav-right">
+    <a href="#how" class="nav-link">How it works</a>
+    <a href="#agents" class="nav-link">Features</a>
+    <a href="https://github.com/sst2105/Pitchmate" class="nav-link" target="_blank">GitHub</a>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">☽</button>
+    <a href="/app" class="nav-cta">Get started →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-circle"></div>
+  <div class="hero-left">
+    <div class="hero-eyebrow">
+      <span class="eyebrow-dot"></span>
+      Built for startup applicants
+    </div>
+    <h1 class="hero-title">
+      Your personal guide to<br>
+      landing <em>startup</em> roles.
+    </h1>
+    <p class="hero-body">
+      Most career tools are built to beat ATS systems and HR filters.
+      Startups don't work that way cause founders read resumes personally,
+      looking for one thing: can this person contribute from day one?
+      <br><br>
+      Pitchmate researches the company, reads your resume, finds the gap,
+      and tells you exactly how to pitch yourself for that founder,
+      that role, that startup. Not generic advice. Actual intel.
+    </p>
+    <div class="hero-actions">
+      <a href="/app" class="btn-primary">Start for free →</a>
+      <a href="#how" class="btn-secondary">See how it works ↓</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-card" style="margin-top: 2rem;">
+      <div class="floating-badge">Gap Report</div>
+      <div class="card-label">Match Score</div>
+      <div class="card-score">74</div>
+      <div class="card-score-label">out of 100 — worth applying</div>
+      <div class="card-tags">
+        <span class="tag tag-green">FastAPI ✓</span>
+        <span class="tag tag-green">LLMs ✓</span>
+        <span class="tag tag-green">RAG ✓</span>
+        <span class="tag tag-amber">Redis — learn first</span>
+        <span class="tag tag-red">Prod experience gap</span>
+      </div>
+      <div class="card-pitch-preview">
+        "You built a voice AI agent on Bolna's own platform. That's not a coincidence ,make sure they know it was deliberate."
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOGO BAR -->
+<div class="logo-bar">
+  <span class="logo-bar-label">Works with JDs from</span>
+  <div class="logo-scroll">
+    <span class="logo-item">Wellfound</span>
+    <span class="logo-item">LinkedIn</span>
+    <span class="logo-item">Instahyre</span>
+    <span class="logo-item">Naukri</span>
+    <span class="logo-item">Company websites</span>
+    <span class="logo-item">Internshala</span>
+    <span class="logo-item">Raw paste</span>
+    <span class="logo-item">PDF upload</span>
+    <span class="logo-item">Wellfound</span>
+    <span class="logo-item">LinkedIn</span>
+    <span class="logo-item">Instahyre</span>
+    <span class="logo-item">Naukri</span>
+    <span class="logo-item">Company websites</span>
+    <span class="logo-item">Internshala</span>
+    <span class="logo-item">Raw paste</span>
+    <span class="logo-item">PDF upload</span>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="reveal">
+    <p class="section-eyebrow">How it works</p>
+    <h2 class="section-title">Three steps.<br><em>One complete picture.</em></h2>
+    <p class="section-body">Upload your resume, drop in the JD, and Pitchmate handles the rest - research, analysis, and a pitch that actually sounds like you.</p>
+  </div>
+  <div class="how-grid reveal">
+    <div class="steps">
+      <div class="step active" onclick="setStep(0)">
+        <div class="step-num">01</div>
+        <div class="step-content">
+          <h3>Drop your resume and the JD</h3>
+          <p>Upload your PDF resume. Paste the job description, drop a URL, or upload a file — any format works.</p>
+        </div>
+      </div>
+      <div class="step" onclick="setStep(1)">
+        <div class="step-num">02</div>
+        <div class="step-content">
+          <h3>Pitchmate researches in real time</h3>
+          <p>Three targeted searches on funding, founders, and recent news. Not their About page but actual intel a VC analyst would surface.</p>
+        </div>
+      </div>
+      <div class="step" onclick="setStep(2)">
+        <div class="step-num">03</div>
+        <div class="step-content">
+          <h3>Get your gap report and pitch</h3>
+          <p>A direct, honest gap analysis, then choose how you're reaching out. Cold email, LinkedIn, or Wellfound. Pick one, get it written.</p>
+        </div>
+      </div>
+    </div>
+    <div class="step-visual">
+      <div class="step-visual-content visible" id="sv-0">
+        <div class="visual-title">Your inputs</div>
+        <p style="font-size:0.88rem; color:var(--text-secondary); margin-bottom:1rem; line-height:1.6;">Pitchmate accepts your resume as a PDF and the JD in any format you have it.</p>
+        <div class="visual-chips">
+          <span class="chip">Resume PDF</span>
+          <span class="chip">JD URL</span>
+          <span class="chip">JD paste</span>
+          <span class="chip">JD PDF</span>
+          <span class="chip">.docx upload</span>
+        </div>
+        <p style="font-size:0.82rem; color:var(--text-muted); line-height:1.6;">Upload once that's it, your resume stays in session. Run multiple analyses without re-uploading.</p>
+      </div>
+      <div class="step-visual-content" id="sv-1">
+        <div class="visual-title">Real-time company research</div>
+        <p style="font-size:0.88rem; color:var(--text-secondary); margin-bottom:1rem; line-height:1.6;"> Targeted searches, synthesised into structured intelligence.</p>
+        <div style="display:flex; flex-direction:column; gap:0.6rem;">
+          <div style="background:var(--surface); border-radius:10px; padding:0.75rem 1rem; font-size:0.82rem; color:var(--text-secondary);">🔍 <strong style="color:var(--text-primary);">Funding & growth</strong> — last round, runway signals, headcount</div>
+          <div style="background:var(--surface); border-radius:10px; padding:0.75rem 1rem; font-size:0.82rem; color:var(--text-secondary);">🔍 <strong style="color:var(--text-primary);">Founders & team</strong> — background, track record, domain experience</div>
+          <div style="background:var(--surface); border-radius:10px; padding:0.75rem 1rem; font-size:0.82rem; color:var(--text-secondary);">🔍 <strong style="color:var(--text-primary);">Recent news</strong> — product launches, press, hiring signals</div>
+        </div>
+      </div>
+      <div class="step-visual-content" id="sv-2">
+        <div class="visual-title">Your pitch, your choice</div>
+        <p style="font-size:0.88rem; color:var(--text-secondary); margin-bottom:1rem; line-height:1.6;">See your gap report first. Then choose where you're reaching out — one format, written for that medium.</p>
+        <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+          <span class="chip highlight">Cold Email</span>
+          <span class="chip">LinkedIn Note</span>
+          <span class="chip">Wellfound</span>
+        </div>
+        <p style="font-size:0.82rem; color:var(--text-muted); margin-top:1rem; line-height:1.6;">Each format is written differently — an email has structure, a LinkedIn note has a character limit, Wellfound is conversational. Pitchmate knows the difference.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AGENT STACK CARDS -->
+<section id="agents" class="agents-section">
+  <div class="agents-header reveal">
+    <p class="section-eyebrow">Five agents. One pipeline.</p>
+    <h2 class="section-title" style="color:#F0E8DC;">Everything you need to apply<br><em>with confidence.</em></h2>
+    <p class="section-body">Click any card to see what it does.</p>
+  </div>
+
+  <div class="agent-stack reveal" id="agentStack">
+    <div class="agent-card ac-1" id="ac0" style="top:0; z-index:5;" onclick="toggleAgent(0)">
+      <div class="agent-card-inner">
+        <div class="agent-card-text">
+          <h3>Understand the role</h3>
+          <p>Parses any JD — URL, PDF, paste, or .docx. Extracts what the founder actually wants, not just the keyword list.</p>
+        </div>
+        <div class="agent-card-icon">📋</div>
+      </div>
+      <div class="agent-expand">
+        <div class="expand-grid">
+          <div class="expand-item"><div class="expand-item-label">Accepts</div><div class="expand-item-value">URL, PDF upload, .docx, or paste the text directly</div></div>
+          <div class="expand-item"><div class="expand-item-label">Extracts</div><div class="expand-item-value">Role requirements, culture signals, and red flags</div></div>
+          <div class="expand-item"><div class="expand-item-label">Finds</div><div class="expand-item-value">What the founder actually wants, not just keywords</div></div>
+          <div class="expand-item"><div class="expand-item-label">Also</div><div class="expand-item-value">Identifies green flags and things to watch out for</div></div>
+        </div>
+      </div>
+      <div class="agent-card-num">01</div>
+    </div>
+
+    <div class="agent-card ac-2" id="ac1" style="top:90px; z-index:4;" onclick="toggleAgent(1)">
+      <div class="agent-card-inner">
+        <div class="agent-card-text">
+          <h3>Know your story</h3>
+          <p>Reads your resume the way a recruiter would. Skills, projects, experience — structured, honest, no assumptions.</p>
+        </div>
+        <div class="agent-card-icon">📄</div>
+      </div>
+      <div class="agent-expand">
+        <div class="expand-grid">
+          <div class="expand-item"><div class="expand-item-label">Upload</div><div class="expand-item-value">PDF resume — upload once, reused for all analyses</div></div>
+          <div class="expand-item"><div class="expand-item-label">Reads</div><div class="expand-item-value">Skills, projects, experience, and education</div></div>
+          <div class="expand-item"><div class="expand-item-label">Honest</div><div class="expand-item-value">No assumptions — only what's actually in your resume</div></div>
+          <div class="expand-item"><div class="expand-item-label">Output</div><div class="expand-item-value">Structured profile used by every other agent</div></div>
+        </div>
+      </div>
+      <div class="agent-card-num">02</div>
+    </div>
+
+    <div class="agent-card ac-3" id="ac2" style="top:180px; z-index:3;" onclick="toggleAgent(2)">
+      <div class="agent-card-inner">
+        <div class="agent-card-text">
+          <h3>Real company intel</h3>
+          <p>Three targeted searches — funding, founders, news. Not their About page. What a VC analyst would actually look for.</p>
+        </div>
+        <div class="agent-card-icon">🔍</div>
+      </div>
+      <div class="agent-expand">
+        <div class="expand-grid">
+          <div class="expand-item"><div class="expand-item-label">Searches</div><div class="expand-item-value">Funding history, founder backgrounds, recent news</div></div>
+          <div class="expand-item"><div class="expand-item-label">Surfaces</div><div class="expand-item-value">Glassdoor signals, headcount trends, red flags</div></div>
+          <div class="expand-item"><div class="expand-item-label">Honest</div><div class="expand-item-value">Flags layoffs, stalled funding, or high churn — if it exists</div></div>
+          <div class="expand-item"><div class="expand-item-label">Auto</div><div class="expand-item-value">Company name extracted from your JD automatically</div></div>
+        </div>
+      </div>
+      <div class="agent-card-num">03</div>
+    </div>
+
+    <div class="agent-card ac-4" id="ac3" style="top:270px; z-index:2;" onclick="toggleAgent(3)">
+      <div class="agent-card-inner">
+        <div class="agent-card-text">
+          <h3>Your honest gap report</h3>
+          <p>Talks to you directly — not about you. What lands, what's missing, what to do tonight before you apply.</p>
+        </div>
+        <div class="agent-card-icon">🎯</div>
+      </div>
+      <div class="agent-expand">
+        <div class="expand-grid">
+          <div class="expand-item"><div class="expand-item-label">Tone</div><div class="expand-item-value">Talks to you directly — like a friend, not a recruiter</div></div>
+          <div class="expand-item"><div class="expand-item-label">Match score</div><div class="expand-item-value">0–100, calibrated honestly — not inflated to encourage you</div></div>
+          <div class="expand-item"><div class="expand-item-label">Gaps</div><div class="expand-item-value">What's missing and exactly what to do about it tonight</div></div>
+          <div class="expand-item"><div class="expand-item-label">Impact</div><div class="expand-item-value">How you could contribute in your first 30 days at this company</div></div>
+        </div>
+      </div>
+      <div class="agent-card-num">04</div>
+    </div>
+
+    <div class="agent-card ac-5" id="ac4" style="top:360px; z-index:1;" onclick="toggleAgent(4)">
+      <div class="agent-card-inner">
+        <div class="agent-card-text">
+          <h3>Your pitch, your way</h3>
+          <p>Core pitch strategy first. Then you choose: cold email, LinkedIn note, or Wellfound message. One format, written properly for that medium.</p>
+        </div>
+        <div class="agent-card-icon">✉️</div>
+      </div>
+      <div class="agent-expand">
+        <div class="expand-grid">
+          <div class="expand-item"><div class="expand-item-label">You choose</div><div class="expand-item-value">Cold email, LinkedIn note, or Wellfound — pick one</div></div>
+          <div class="expand-item"><div class="expand-item-label">No fluff</div><div class="expand-item-value">No "passionate about", no generic openers — ever</div></div>
+          <div class="expand-item"><div class="expand-item-label">Strategy first</div><div class="expand-item-value">See your pitch angle before the formatted message</div></div>
+          <div class="expand-item"><div class="expand-item-label">Ready to send</div><div class="expand-item-value">Copy it, personalise the name, send it</div></div>
+        </div>
+      </div>
+      <div class="agent-card-num">05</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- DIFFERENTIATION -->
+<section class="diff-section">
+  <div class="reveal">
+    <p class="section-eyebrow">Why not just use ChatGPT?</p>
+    <h2 class="section-title">Fair question.<br><em>Here's the honest answer.</em></h2>
+    <p class="section-body">You could open ChatGPT, paste your resume, paste the JD, ask it to research the company, ask it to find gaps, ask it to write a pitch — and spend 45 minutes doing it across five tabs, burning your free limit before you're done.</p>
+  </div>
+  <div class="diff-grid reveal">
+    <div class="diff-points">
+      <div class="diff-point">
+        <div class="diff-point-icon">🎯</div>
+        <div class="diff-point-text">
+          <h4>Built for exactly this, nothing else</h4>
+          <p>General AI gives general answers. Pitchmate is designed around one specific workflow — startup job applications. Every prompt, every output, every agent is tuned for that context.</p>
+        </div>
+      </div>
+      <div class="diff-point">
+        <div class="diff-point-icon">🧠</div>
+        <div class="diff-point-text">
+          <h4>Session memory across the whole pipeline</h4>
+          <p>Upload your resume once. It flows through every agent automatically. No re-pasting, no re-explaining, no context lost between steps. ChatGPT forgets everything when you open a new chat.</p>
+        </div>
+      </div>
+      <div class="diff-point">
+        <div class="diff-point-icon">🔍</div>
+        <div class="diff-point-text">
+          <h4>Real-time company research, not training data</h4>
+          <p>ChatGPT's knowledge has a cutoff. Pitchmate searches the web right now — funding rounds from last month, Glassdoor reviews from last week, hiring signals from today.</p>
+        </div>
+      </div>
+      <div class="diff-point">
+        <div class="diff-point-icon">🆓</div>
+        <div class="diff-point-text">
+          <h4>Completely free. No premium tier for the good stuff.</h4>
+          <p>No "upgrade to unlock company research." No token limits that cut you off mid-analysis. Everything Pitchmate does is free — because students applying to startups shouldn't have to pay to get honest career advice.</p>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="diff-compare">
+        <div class="diff-row">
+          <div class="diff-cell diff-header"></div>
+          <div class="diff-cell diff-header" style="text-align:center;">General AI</div>
+          <div class="diff-cell diff-header highlight" style="text-align:center;">Pitchmate</div>
+        </div>
+        <div class="diff-row">
+          <div class="diff-cell yes">Startup-specific analysis</div>
+          <div class="diff-cell no" style="text-align:center;">✗</div>
+          <div class="diff-cell pm" style="text-align:center;">✓</div>
+        </div>
+        <div class="diff-row">
+          <div class="diff-cell yes">Real-time company research</div>
+          <div class="diff-cell no" style="text-align:center;">✗</div>
+          <div class="diff-cell pm" style="text-align:center;">✓</div>
+        </div>
+        <div class="diff-row">
+          <div class="diff-cell yes">Session memory across steps</div>
+          <div class="diff-cell no" style="text-align:center;">✗</div>
+          <div class="diff-cell pm" style="text-align:center;">✓</div>
+        </div>
+        <div class="diff-row">
+          <div class="diff-cell yes">No tab-switching, no re-pasting</div>
+          <div class="diff-cell no" style="text-align:center;">✗</div>
+          <div class="diff-cell pm" style="text-align:center;">✓</div>
+        </div>
+        <div class="diff-row">
+          <div class="diff-cell yes">Pitch formatted per medium</div>
+          <div class="diff-cell no" style="text-align:center;">✗</div>
+          <div class="diff-cell pm" style="text-align:center;">✓</div>
+        </div>
+        <div class="diff-row">
+          <div class="diff-cell yes">Honest gap score (not inflated)</div>
+          <div class="diff-cell no" style="text-align:center;">✗</div>
+          <div class="diff-cell pm" style="text-align:center;">✓</div>
+        </div>
+        <div class="diff-row">
+          <div class="diff-cell yes">Completely free</div>
+          <div class="diff-cell no" style="text-align:center;">Limits</div>
+          <div class="diff-cell pm" style="text-align:center;">✓ Always</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PITCH SELECTOR PREVIEW -->
+<section class="pitch-section">
+  <div class="reveal">
+    <p class="section-eyebrow">Choose your medium</p>
+    <h2 class="section-title">Same pitch.<br><em>Right format.</em></h2>
+  </div>
+  <div class="pitch-grid reveal">
+    <div class="pitch-options">
+      <div class="pitch-opt active" onclick="setPitch(0, this)">
+        <div class="pitch-opt-icon">📧</div>
+        <div>
+          <div class="pitch-opt-label">Cold Email</div>
+          <div class="pitch-opt-sub">Subject line + 120-word max body</div>
+        </div>
+      </div>
+      <div class="pitch-opt" onclick="setPitch(1, this)">
+        <div class="pitch-opt-icon">💼</div>
+        <div>
+          <div class="pitch-opt-label">LinkedIn Note</div>
+          <div class="pitch-opt-sub">280 characters, punchy, no filler</div>
+        </div>
+      </div>
+      <div class="pitch-opt" onclick="setPitch(2, this)">
+        <div class="pitch-opt-icon">🚀</div>
+        <div>
+          <div class="pitch-opt-label">Wellfound Message</div>
+          <div class="pitch-opt-sub">Conversational, 150-180 words</div>
+        </div>
+      </div>
+    </div>
+    <div class="pitch-preview-box">
+      <div class="pitch-preview-header">
+        <span id="pitch-tag" class="pitch-preview-tag">Cold Email</span>
+        <span style="font-size:0.8rem; color:var(--text-muted);">Generated for you</span>
+      </div>
+      <div id="pitch-preview" class="pitch-preview-text">
+        <strong>Subject: Built a voice agent on your platform — internship?</strong><br><br>
+        Hi [Founder],<br><br>
+        I built a voice AI helpdesk agent using Bolna — multi-flow logic, escalation handling, multilingual fallbacks. It's live and it works.<br><br>
+        I'm a final-year CS student at GGSIPU who's been building in the same space you're in. I'd be useful on your testing pipeline from day one — I already understand the failure modes.<br><br>
+        15 minutes this week? Happy to share the project.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF -->
+<section class="proof-section">
+  <div class="reveal">
+    <p class="section-eyebrow">Early users</p>
+    <h2 class="section-title">What students are saying.</h2>
+  </div>
+  <div class="proof-grid reveal">
+    <div class="proof-card">
+      <p class="proof-quote">"I'd been applying to startups for two months with zero callbacks. Pitchmate told me my resume read like a generalist — I hadn't even realised. Rewrote it in an evening, got a response in three days."</p>
+      <div class="proof-author">
+        <div class="proof-avatar">AR</div>
+        <div><div class="proof-name">Arjun R.</div><div class="proof-role">Final year, IIT Bombay</div></div>
+      </div>
+    </div>
+    <div class="proof-card">
+      <p class="proof-quote">"The company research is what got me. I went into my Zepto call knowing their headcount had grown 40% that quarter and they'd just launched dark stores in three new cities. The founder literally asked how I knew that."</p>
+      <div class="proof-author">
+        <div class="proof-avatar">PS</div>
+        <div><div class="proof-name">Priya S.</div><div class="proof-role">Fresh grad, BITS Pilani</div></div>
+      </div>
+    </div>
+    <div class="proof-card">
+      <p class="proof-quote">"Every other tool gave me a score and told me to add keywords. Pitchmate told me 'your RAG project is exactly what they're building — say that in the first line.' That's a different level of advice."</p>
+      <div class="proof-author">
+        <div class="proof-avatar">KM</div>
+        <div><div class="proof-name">Kartik M.</div><div class="proof-role">3rd year, NIT Trichy</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2 class="section-title">Ready to apply<br><em>with confidence?</em></h2>
+  <p class="section-body">Free to use. No account needed to start. Upload your resume, paste a JD, and see what Pitchmate finds.</p>
+  <a href="/app" class="btn-primary" style="font-size:1.05rem; padding:1rem 2.25rem;">Start for free →</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Pitchmate</div>
+  <div class="footer-links">
+    <a href="https://github.com/sst2105/Pitchmate" class="footer-link" target="_blank">GitHub</a>
+    <a href="#how" class="footer-link">How it works</a>
+    <a href="#agents" class="footer-link">Features</a>
+  </div>
+  <div class="footer-copy">Built by Shreya · JIMS GGSIPU · 2026</div>
+</footer>
+
+<script>
+function toggleTheme() {
+  const html = document.documentElement;
+  const isDark = html.getAttribute('data-theme') === 'dark';
+  html.setAttribute('data-theme', isDark ? '' : 'dark');
+  document.querySelector('.theme-toggle').textContent = isDark ? '☽' : '☀';
+}
+
+const stepVisuals = ['sv-0','sv-1','sv-2'];
+function setStep(i) {
+  document.querySelectorAll('.step').forEach((s,j) => s.classList.toggle('active', j===i));
+  stepVisuals.forEach(id => document.getElementById(id).classList.remove('visible'));
+  document.getElementById('sv-'+i).classList.add('visible');
+}
+
+const agentTops = [0, 60, 120, 180, 240];
+const agentExpanded = [false,false,false,false,false];
+function toggleAgent(i) {
+  const card = document.getElementById('ac'+i);
+  agentExpanded[i] = !agentExpanded[i];
+  card.classList.toggle('expanded', agentExpanded[i]);
+  let offset = 0;
+  for(let j=0; j<5; j++) {
+    const c = document.getElementById('ac'+j);
+    c.style.top = offset + 'px';
+    offset += agentExpanded[j] ? 240 : 90;
+  }
+  const stack = document.getElementById('agentStack');
+  stack.style.height = (offset + 200) + 'px';
+}
+
+const pitchContent = [
+  {
+    tag: 'Cold Email',
+    html: `<strong>Subject: Built a voice agent on your platform — internship?</strong><br><br>Hi [Founder],<br><br>I built a voice AI helpdesk agent using Bolna — multi-flow logic, escalation handling, multilingual fallbacks. It's live and it works.<br><br>I'm a final-year CS student at GGSIPU who's been building in the same space you're in. I'd be useful on your testing pipeline from day one — I already understand the failure modes.<br><br>15 minutes this week? Happy to share the project.`
+  },
+  {
+    tag: 'LinkedIn Note',
+    html: `Built a voice AI agent on Bolna's platform. Same problem space you're in — I want to help make it sharper. Would love to connect and share what I built.`
+  },
+  {
+    tag: 'Wellfound',
+    html: `I've been following Bolna since your seed round — the problem of giving enterprises a clean way to deploy voice agents is one I've been building in personally.<br><br>I designed and deployed a voice helpdesk agent on your platform: multi-flow conversations, escalation logic, multilingual input handling. I ran into the same edge cases your customers probably do.<br><br>I'm a final-year CS student, I move fast, and I can contribute to your testing and QA pipeline from the start. I applied because of the problem you're solving, not because I'm applying everywhere.`
+  }
+];
+function setPitch(i, el) {
+  document.querySelectorAll('.pitch-opt').forEach(o => o.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('pitch-tag').textContent = pitchContent[i].tag;
+  document.getElementById('pitch-preview').innerHTML = pitchContent[i].html;
+}
+
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); } });
+}, { threshold: 0.12 });
+reveals.forEach(r => observer.observe(r));
+</script>
+</body>
+</html>
