@@ -1,7 +1,8 @@
 import tempfile
 import os
 
-from fastapi import APIRouter, UploadFile, File, Form, HTTPException, Header, Depends
+from utils.rate_limiter import limiter
+from fastapi import APIRouter, UploadFile, File, Form, HTTPException, Header, Depends,Request
 from sqlalchemy.orm import Session
 from typing import Optional 
 
@@ -33,7 +34,9 @@ def reset_session(x_session_id: Optional[str] = Header(default=None), db: Sessio
  
  
 @router.post("/resume")
+@limiter.limit("10/hour")
 async def pipeline_resume(
+    request: Request,
     x_session_id: Optional[str] = Header(default=None),
     resume: Optional[UploadFile] = File(default=None),
     db: Session = Depends(get_db),
@@ -65,7 +68,9 @@ async def pipeline_resume(
  
  
 @router.post("/jd")
+@limiter.limit("20/hour")
 async def pipeline_jd(
+    request: Request,
     x_session_id: Optional[str] = Header(default=None),
     jd_text: str = Form(default=""),
     jd_url:  str = Form(default=""),
@@ -98,7 +103,9 @@ async def pipeline_jd(
  
  
 @router.post("/company")
+@limiter.limit("3/hour")
 async def pipeline_company(
+    request: Request,
     x_session_id: Optional[str] = Header(default=None),
     company_name: str = Form(default=""),
     db: Session = Depends(get_db),
@@ -125,7 +132,9 @@ async def pipeline_company(
  
  
 @router.post("/gap")
+@limiter.limit("10/hour")
 async def pipeline_gap(
+    request : Request,
     x_session_id: Optional[str] = Header(default=None),
     resume: Optional[UploadFile] = File(default=None),
     jd_text: str = Form(default=""),

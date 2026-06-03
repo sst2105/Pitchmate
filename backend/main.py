@@ -1,5 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from slowapi import _rate_limit_exceeded_handler
+from slowapi.errors import RateLimitExceeded
 from dotenv import load_dotenv
 from pathlib import Path
 from services.database import create_tables
@@ -13,19 +15,26 @@ from routes.company_routes import router as company_router
 from routes.gap_rotes import router as gap_router
 from routes.pipeline_routes import router as pipeline_router
 from routes.pitch_routes import router as pitch_router
+from utils.rate_limiter import limiter, rate_limit_exceeded_handler 
 
-app = FastAPI(title = "CareerAssitant API", version = "0.1.0")
+app = FastAPI(title = "Pitchmate API", version = "0.1.0")
 
+
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, rate_limit_exceeded_handler)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
     "http://localhost:3000",
     "http://127.0.0.1:3000",
+    "https://*.vercel.app",
 ],
     allow_credentials= True,
     allow_methods = ["*"],
     allow_headers = ["*"]
 )
+
+create_tables()
 
 app.include_router(jd_router)
 app.include_router(resume_router, prefix="")
@@ -40,4 +49,4 @@ def health():
     
 @app.get("/")
 def root():
-    return {"status": "Career Pilot API running"}
+    return {"status": "Pitchmate API running"}

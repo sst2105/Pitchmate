@@ -1,4 +1,5 @@
-from fastapi import APIRouter, Header, HTTPException, Depends
+from utils.rate_limiter import limiter
+from fastapi import APIRouter, Header, HTTPException, Depends, Request
 from typing import Optional
 
 
@@ -13,7 +14,9 @@ router = APIRouter(prefix="/pipeline")
 
 
 @router.post("/pitch")
+@limiter.limit("10/hour")
 async def pipeline_pitch(
+    request: Request,
     x_session_id : Optional[str] = Header(default=None),
     db:Session = Depends(get_db),) -> dict:
     session = get_session(db, x_session_id)

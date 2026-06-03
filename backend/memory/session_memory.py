@@ -1,5 +1,4 @@
 from dataclasses import dataclass, field
-from tkinter import NO
 from typing import Optional
 
 @dataclass
