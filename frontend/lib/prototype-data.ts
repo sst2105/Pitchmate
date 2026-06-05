@@ -2197,7 +2197,7 @@ export const appHtml = `
 export const appScript = `
 
 /* CONFIG */
-const API_BASE = window.__PITCHMATE_API_BASE__ || 'http://localhost:8000';
+const API_BASE = window.__PITCHMATE_API_BASE__ || 'https://pitchmate-api-641857263230.asia-south1.run.app';
 const SESSION_ID = localStorage.getItem('pm_session') || crypto.randomUUID();
 localStorage.setItem('pm_session', SESSION_ID);
 
