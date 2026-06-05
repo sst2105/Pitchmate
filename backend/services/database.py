@@ -6,10 +6,10 @@ from pathlib import Path
 
 load_dotenv(Path(__file__).parent.parent / ".env")
 
-DATABASE_URL = os.getenv("DATABASE_URL")
+DATABASE_URL = os.environ.get("DATABASE_URL")
 
 if not DATABASE_URL:
-    raise ValueError("DATABASE_URL is not set in .env file.")
+    raise ValueError("DATABASE_URL env is not set in .env file.")
 
 engine = create_engine(
     DATABASE_URL,
