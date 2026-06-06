@@ -42,7 +42,7 @@ async def pipeline_resume(
     db: Session = Depends(get_db),
 ) -> dict:
     sid = _sid(x_session_id)
-    session = get_session(db, sid)
+    session = get_session(sid)
  
     if resume is None:
         if session.get("resume"):

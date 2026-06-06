@@ -19,7 +19,7 @@ async def pipeline_pitch(
     request: Request,
     x_session_id : Optional[str] = Header(default=None),
     db:Session = Depends(get_db),) -> dict:
-    session = get_session(db, x_session_id)
+    session = get_session(x_session_id)
     update_session(x_session_id, pitch = ...)
     if not x_session_id:
         raise HTTPException(status_code=400, detail="X-Session-ID header is required")
