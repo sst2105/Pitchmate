@@ -7,8 +7,6 @@ from pathlib import Path
 from services.database import create_tables
 from contextlib import asynccontextmanager
 
-load_dotenv(Path(__file__).parent / ".env")
-create_tables()
 
 from routes.jd_routes import router as jd_router 
 from routes.resume_routes import router as resume_router
@@ -34,8 +32,9 @@ app.add_middleware(
     "http://localhost:3000",
     "http://127.0.0.1:3000",
     "https://*.vercel.app",
+    "https://pitchmate-qw404rr5p-shreyas-projects-431f7969.vercel.app",
 ],
-    allow_credentials= True,
+    allow_credentials= False,
     allow_methods = ["*"],
     allow_headers = ["*"]
 )
