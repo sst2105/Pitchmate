@@ -5,6 +5,7 @@ from slowapi.errors import RateLimitExceeded
 from dotenv import load_dotenv
 from pathlib import Path
 from services.database import create_tables
+from contextlib import asynccontextmanager
 
 load_dotenv(Path(__file__).parent / ".env")
 create_tables()
@@ -17,7 +18,12 @@ from routes.pipeline_routes import router as pipeline_router
 from routes.pitch_routes import router as pitch_router
 from utils.rate_limiter import limiter, rate_limit_exceeded_handler 
 
-app = FastAPI(title = "Pitchmate API", version = "0.1.0")
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    create_tables()
+    yield
+
+app = FastAPI(title = "Pitchmate API", version = "0.1.0",lifespan=lifespan)
 
 
 app.state.limiter = limiter
