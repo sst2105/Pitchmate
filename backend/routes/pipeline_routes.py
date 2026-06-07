@@ -146,7 +146,7 @@ async def pipeline_gap(
     session = get_session(sid)
     needs = []
  
-    resume_data = session.get("resume")
+    resume_data = session.resume
     if resume_data is None and resume is not None:
         if not resume.filename.lower().endswith(".pdf"):
             raise HTTPException(status_code=400, detail="Resume must be a PDF")
@@ -165,7 +165,7 @@ async def pipeline_gap(
     if resume_data is None:
         needs.append("resume_pdf")
  
-    jd_data = session.get("jd")
+    jd_data = session.jd
     if jd_data is None and (jd_text.strip() or jd_url.strip() or jd_file is not None):
         try:
             if jd_text.strip():
