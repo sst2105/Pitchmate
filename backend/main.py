@@ -31,10 +31,9 @@ app.add_middleware(
     allow_origins=[
     "http://localhost:3000",
     "http://127.0.0.1:3000",
-    "https://*.vercel.app",
-    "https://pitchmate-qw404rr5p-shreyas-projects-431f7969.vercel.app",
+    "https://pitchmate-sigma.vercel.app",  # your main production domain
 ],
-    allow_credentials= False,
+    allow_credentials= True,
     allow_methods = ["*"],
     allow_headers = ["*"]
 )
