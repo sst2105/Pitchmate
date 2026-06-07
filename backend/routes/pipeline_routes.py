@@ -63,7 +63,7 @@ async def pipeline_resume(
     finally:
         os.unlink(tmp_path)
  
-    update_session(db, sid, resume=result.__dict__)
+    update_session(sid, resume=result.__dict__)
     return {"source": "fresh", "resume": result.__dict__}
  
  
@@ -98,7 +98,7 @@ async def pipeline_jd(
     except ValueError as e:
         raise HTTPException(status_code=422, detail=str(e))
  
-    update_session(db, sid, jd=result.__dict__)
+    update_session(sid, jd=result.__dict__)
     return {"source": "fresh", "jd": result.__dict__}
  
  
@@ -127,7 +127,7 @@ async def pipeline_company(
     except Exception as e:
         raise HTTPException(status_code=422, detail=str(e))
  
-    update_session(db, sid, company=result.__dict__)
+    update_session(sid, company=result.__dict__)
     return {"source": "fresh", "company": result.__dict__}
  
  
@@ -160,7 +160,7 @@ async def pipeline_gap(
             raise HTTPException(status_code=422, detail=str(e))
         finally:
             os.unlink(tmp_path)
-        update_session(db, sid, resume=r.__dict__)
+        update_session(sid, resume=r.__dict__)
         resume_data = r.__dict__
     if resume_data is None:
         needs.append("resume_pdf")
@@ -179,7 +179,7 @@ async def pipeline_gap(
             j = analyze_jd(raw_jd)
         except ValueError as e:
             raise HTTPException(status_code=422, detail=str(e))
-        update_session(db, sid, jd=j.__dict__)
+        update_session(sid, jd=j.__dict__)
         jd_data = j.__dict__
     if jd_data is None:
         needs.append("jd_text or jd_url or jd_file")
@@ -196,7 +196,7 @@ async def pipeline_gap(
     except ValueError as e:
         raise HTTPException(status_code=422, detail=str(e))
  
-    update_session(db, sid, gap=gap.__dict__)
+    update_session(sid, gap=gap.__dict__)
     return {"gap": gap.__dict__}
 
 
