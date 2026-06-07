@@ -78,7 +78,7 @@ async def pipeline_jd(
     db: Session = Depends(get_db),
 ) -> dict:
     sid = _sid(x_session_id)
-    session = get_session(db, sid)
+    session = get_session(sid)
  
     if not jd_text.strip() and not jd_url.strip() and jd_file is None:
         if session.get("jd"):
@@ -111,7 +111,7 @@ async def pipeline_company(
     db: Session = Depends(get_db),
 ) -> dict:
     sid = _sid(x_session_id)
-    session = get_session(db, sid)
+    session = get_session(sid)
  
     name = company_name.strip()
     role = ""
@@ -143,7 +143,7 @@ async def pipeline_gap(
     db: Session = Depends(get_db),
 ) -> dict:
     sid = _sid(x_session_id)
-    session = get_session(db, sid)
+    session = get_session(sid)
     needs = []
  
     resume_data = session.get("resume")
