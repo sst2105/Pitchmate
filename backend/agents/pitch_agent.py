@@ -17,10 +17,11 @@ class PitchCore:
 
 @dataclass 
 class FormattedPitches:
-    email_subject:      str        
-    email_body:         str         
-    linkedin_note:      str         
-    wellfound_message:  str 
+    email_subject:              str        
+    email_body:                 str         
+    linkedin_connection_note:   str         
+    linkedin_dm:                str
+    wellfound_message:          str 
 
 @dataclass
 class PitchAngle:
@@ -73,8 +74,9 @@ Return ONLY a JSON object with this exact structure:
   },
   "pitches": {
     "email_subject": "Under 50 chars. Specific. Makes them curious without being clickbait. Must reference something real — their product, a shared context, the candidate's actual work. Example style: 'Built a voice agent on your platform — internship?' NOT 'Excited about Bolna AI'",
-    "email_body": "Max 120 words. Structure exactly: Line 1 is the hook (what you built or did, one sentence). Lines 2-3 are  the value (why it matters for them specifically, what you could do). Line 4 is the ask (small: 15-min call, quick look at portfolio, a reply). Sign off with name only. No 'Dear Hiring Manager'. No 'I hope this email finds you well'. Reads like a real person typed it fast because they meant it.",
-    "linkedin_note": "Hard limit: 280 characters including spaces. One punchy thing that makes them want to accept. Opens with what you did, not who you are. No filler. Count the characters.",
+    "email_body": "100-150 words. Structure exactly: Opens with a one-line greeting using the founder or team's first name if known, otherwise 'Hi [Company] team,'. Then one sentence of natural context for why you're reaching out (e.g. 'I've been using [product] and started digging into how you built it' or 'Saw the [recent news item] and it caught my attention'). Then the hook (what you built, one sentence). Then 2 sentences of value tied to a real company need. Then the ask, small and specific (15-min call, a look at a demo, a reply with thoughts). Close naturally — 'Either way, here's what I built: [link placeholder]' or similar, not 'Best regards'. Sign off with first name only. No 'Dear Hiring Manager'. No 'I hope this email finds you well'. Should read like a real person who did their homework and typed it with intent, not a template.",
+    "linkedin_connection_note": "Hard limit: 300 characters including spaces, this is LinkedIn's actual connection request limit. Goal is ONLY to get the request accepted, not to pitch. One specific, genuine reason for connecting — something about their work, the company, or a shared technical interest. No ask, no pitch, no 'I'd love to discuss opportunities'. Should read like a real person who has a real reason, not a recruiter template. Count the characters.",
+    "linkedin_dm": "80-120 words. This is the follow-up message sent AFTER the connection request is accepted. Now you can pitch. Opens with a brief thanks for connecting or a natural continuation, not 'Thank you for accepting'. Then the hook and value, similar structure to the email but more conversational and shorter. Ends with a small, specific ask. Should feel like a natural DM, not a cover letter pasted into a chat box.",
     "wellfound_message": "150-180 words. Conversational and more relaxed than email but still sharp. Show one specific thing you know about the company that isn't on their homepage (from the research: funding stage, recent news, founder background, what they're actually building). Make clear why you're applying to them specifically, not startups in general. End with genuine interest, not begging."
   }
 }
@@ -133,10 +135,11 @@ CULTURE: {', '.join(company.culture_signals[:2]) if company.culture_signals else
     )
  
     pitches = FormattedPitches(
-        email_subject     = pitches_data.get("email_subject",    ""),
-        email_body        = pitches_data.get("email_body",       ""),
-        linkedin_note     = pitches_data.get("linkedin_note",    ""),
-        wellfound_message = pitches_data.get("wellfound_message",""),
+        email_subject             = pitches_data.get("email_subject",            ""),
+        email_body                = pitches_data.get("email_body",               ""),
+        linkedin_connection_note  = pitches_data.get("linkedin_connection_note",  ""),
+        linkedin_dm               = pitches_data.get("linkedin_dm",               ""),
+        wellfound_message         = pitches_data.get("wellfound_message",         ""),
     )
  
     return PitchAngle(

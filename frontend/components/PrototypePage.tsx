@@ -19,8 +19,6 @@ export function PrototypePage({ css, html, script, apiBase }: PrototypePageProps
   useEffect(() => {
     if (apiBase) window.__PITCHMATE_API_BASE__ = apiBase;
 
-    // The uploaded prototype used inline onclick handlers.
-    // Global eval preserves those browser-style handlers while we migrate to real React components later.
     (0, eval)(script);
 
     return () => {

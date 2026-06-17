@@ -1868,6 +1868,26 @@ textarea:focus { border-color:var(--mocha-200); }
   .peel-section { height:520vh; }
   .peel-sticky { padding:0 6px; }
   .flip-shell, .flip-card { min-height:560px; }
+  .peel-card {
+    width: 36px; 
+  }
+
+  .peel-card.is-active {
+    width: calc(100vw - 36px * 4 - 12px) 
+  }
+
+  .spine-label {
+    font-size: 0.52rem;
+    letter-spacing: 0.18em;
+  }
+
+  .spine-num {
+    display: none;
+  }
+
+  .panel-head-title {
+    font-size: 1.25rem;
+  }
 }
 
 `;
