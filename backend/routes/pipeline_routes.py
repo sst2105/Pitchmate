@@ -34,7 +34,7 @@ def reset_session(x_session_id: Optional[str] = Header(default=None), db: Sessio
  
  
 @router.post("/resume")
-@limiter.limit("10/hour")
+@limiter.limit("30/hour")
 async def pipeline_resume(
     request: Request,
     x_session_id: Optional[str] = Header(default=None),
@@ -68,7 +68,7 @@ async def pipeline_resume(
  
  
 @router.post("/jd")
-@limiter.limit("20/hour")
+@limiter.limit("50/hour")
 async def pipeline_jd(
     request: Request,
     x_session_id: Optional[str] = Header(default=None),
@@ -103,7 +103,7 @@ async def pipeline_jd(
  
  
 @router.post("/company")
-@limiter.limit("3/hour")
+@limiter.limit("20/hour")
 async def pipeline_company(
     request: Request,
     x_session_id: Optional[str] = Header(default=None),
@@ -132,7 +132,7 @@ async def pipeline_company(
  
  
 @router.post("/gap")
-@limiter.limit("10/hour")
+@limiter.limit("30/hour")
 async def pipeline_gap(
     request : Request,
     x_session_id: Optional[str] = Header(default=None),

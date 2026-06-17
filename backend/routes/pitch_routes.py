@@ -14,7 +14,7 @@ router = APIRouter(prefix="/pipeline")
 
 
 @router.post("/pitch")
-@limiter.limit("10/hour")
+@limiter.limit("30/hour")
 async def pipeline_pitch(
     request: Request,
     x_session_id : Optional[str] = Header(default=None),
