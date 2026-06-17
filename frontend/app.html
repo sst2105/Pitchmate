@@ -1726,7 +1726,7 @@ function renderPitch(data) {
   function mediumHTML() {
     const opts = [
       { key:'email', label:'📧 Cold Email', sub:'Subject line + 120-word max' },
-      { key:'linkedin', label:'💼 LinkedIn Note', sub:'280 chars, punchy' },
+      { key:'linkedin', label:'💼 LinkedIn', sub:'Connection note + follow-up DM' },
       { key:'wellfound', label:'🚀 Wellfound', sub:'150-180 words, conversational' },
     ];
     return `
@@ -1803,34 +1803,63 @@ function selectPitchMedium(type, pitches) {
   }
 
   let content = '';
+  let isLinkedin = false;
   if (type === 'email') {
     content = `<strong style="display:block;margin-bottom:.75rem;color:var(--text-primary)">Subject: ${p.email_subject || ''}</strong>${(p.email_body || '').replace(/\n/g,'<br>')}`;
   } else if (type === 'linkedin') {
-    content = p.linkedin_note || '';
+    isLinkedin = true;
   } else {
     content = (p.wellfound_message || '').replace(/\n/g,'<br>');
   }
 
   const area = document.getElementById('pitch-output-area');
-  if (area) {
+  if (!area) return;
+
+  if (isLinkedin) {
+    const connectionNote = p.linkedin_connection_note || '';
+    const dm = p.linkedin_dm || '';
     area.innerHTML = `
-      <div class="summary-box" style="white-space:pre-wrap">${content}</div>
-      <button onclick="copyText(this, \`${content.replace(/\`/g,"'")}\`)"
-        style="margin-top:.75rem;width:100%;padding:.6rem;border-radius:10px;
+      <div class="result-label" style="margin-bottom:.4rem;">Step 1 — Connection request</div>
+      <div class="summary-box" style="white-space:pre-wrap">${connectionNote}</div>
+      <button onclick="copyText(this, \`${connectionNote.replace(/\`/g,"'")}\`)"
+        style="margin-top:.5rem;margin-bottom:1.25rem;width:100%;padding:.6rem;border-radius:10px;
           border:1px solid var(--border);background:none;font-size:.82rem;
           color:var(--text-secondary);cursor:pointer;font-family:'DM Sans',sans-serif;
           display:flex;align-items:center;justify-content:center;gap:.4rem;">
-        📋 Copy to clipboard
+        📋 Copy connection note
+      </button>
+
+      <div class="result-label" style="margin-bottom:.4rem;">Step 2 — Once they accept, send this</div>
+      <div class="summary-box" style="white-space:pre-wrap">${dm.replace(/\n/g,'<br>')}</div>
+      <button onclick="copyText(this, \`${dm.replace(/\`/g,"'").replace(/\n/g,'\\n')}\`)"
+        style="margin-top:.5rem;width:100%;padding:.6rem;border-radius:10px;
+          border:1px solid var(--border);background:none;font-size:.82rem;
+          color:var(--text-secondary);cursor:pointer;font-family:'DM Sans',sans-serif;
+          display:flex;align-items:center;justify-content:center;gap:.4rem;">
+        📋 Copy follow-up DM
       </button>
     `;
+    return;
   }
+
+  area.innerHTML = `
+    <div class="summary-box" style="white-space:pre-wrap">${content}</div>
+    <button onclick="copyText(this, \`${content.replace(/\`/g,"'")}\`)"
+      style="margin-top:.75rem;width:100%;padding:.6rem;border-radius:10px;
+        border:1px solid var(--border);background:none;font-size:.82rem;
+        color:var(--text-secondary);cursor:pointer;font-family:'DM Sans',sans-serif;
+        display:flex;align-items:center;justify-content:center;gap:.4rem;">
+      📋 Copy to clipboard
+    </button>
+  `;
 }
 
 function copyText(btn, text) {
   const clean = text.replace(/<[^>]+>/g,'').trim();
+  const original = btn.innerHTML;
   navigator.clipboard.writeText(clean).then(() => {
     btn.textContent = '✓ Copied!';
-    setTimeout(() => { btn.innerHTML = '📋 Copy to clipboard'; }, 2000);
+    setTimeout(() => { btn.innerHTML = original; }, 2000);
   });
 }
 
